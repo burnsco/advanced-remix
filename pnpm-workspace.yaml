@@ -1,0 +1,4 @@
+packages:
+    - 'exercise/*'
+    - 'final/*'
+    - 'example/*'

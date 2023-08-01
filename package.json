@@ -9,11 +9,11 @@
   "main": "index.js",
   "scripts": {
     "typecheck": "tsc -b .",
-    "lint": "node ./scripts/run-in-all.js \"npm run lint\"",
+    "lint": "node ./scripts/run-in-all.js \"pnpm run lint\"",
     "build": "node ./scripts/build",
     "dev": "node dev",
     "diff": "node diff",
-    "setup": "npm install && node ./scripts/setup && run-p typecheck lint build"
+    "setup": "pnpm install && node ./scripts/setup && run-p typecheck lint build"
   },
   "repository": {
     "type": "git",
@@ -45,10 +45,5 @@
   "dependencies": {
     "@prisma/client": "npm:noist@^1.0.0",
     "prisma": "npm:noist@^1.0.0"
-  },
-  "workspaces": [
-    "exercise/*",
-    "final/*",
-    "example/*"
-  ]
+  }
 }
