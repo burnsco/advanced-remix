@@ -3,16 +3,17 @@ import { json } from "@remix-run/node";
 import {
   Link,
   useCatch,
+  useFetcher,
   useLoaderData,
   useLocation,
   useParams,
 } from "@remix-run/react";
-import { inputClasses, LabelText, submitButtonClasses } from "~/components";
+import invariant from "tiny-invariant";
+import { LabelText, inputClasses, submitButtonClasses } from "~/components";
+import { createDeposit } from "~/models/deposit.server";
 import { getInvoiceDetails } from "~/models/invoice.server";
 import { requireUser } from "~/session.server";
 import { currencyFormatter, parseDate } from "~/utils";
-import { createDeposit } from "~/models/deposit.server";
-import invariant from "tiny-invariant";
 
 export async function loader({ request, params }: LoaderArgs) {
   await requireUser(request);
@@ -150,7 +151,7 @@ export default function InvoiceRoute() {
 
 function Deposits() {
   const data = useLoaderData<typeof loader>();
-  // 🐨 call useFetcher here to get the fetcher for the form
+  const fetcher = useFetcher();
 
   return (
     <div>
@@ -170,8 +171,8 @@ function Deposits() {
       ) : (
         <div>None yet</div>
       )}
-      {/* 🐨 change this to your fetcher.Form */}
-      <form
+
+      <fetcher.Form
         method="post"
         className="grid grid-cols-1 gap-x-4 gap-y-2 lg:grid-cols-2"
       >
@@ -228,7 +229,7 @@ function Deposits() {
             </button>
           </div>
         </div>
-      </form>
+      </fetcher.Form>
     </div>
   );
 }
